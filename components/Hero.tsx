@@ -140,6 +140,5 @@ const styles: Record<string, React.CSSProperties> = {
   photo: {
     objectFit: "cover",
     filter: "grayscale(1) contrast(1.05)",
-    mixBlendMode: "multiply",
   },
 };
