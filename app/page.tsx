@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import NeuralGraph from "@/components/NeuralGraph";
 import ProjectsCarousel from "@/components/ProjectsCarousel";
+import EngineeringJudgment from "@/components/EngineeringJudgment";
 import SkillsGrid from "@/components/SkillsGrid";
 import ContactDrawer from "@/components/ContactDrawer";
 import Footer from "@/components/Footer";
@@ -30,6 +31,7 @@ export default function Home() {
         <NeuralGraph />
         <ProjectsCarousel />
         <SkillsGrid />
+        <EngineeringJudgment />
       </main>
 
       <Footer />
