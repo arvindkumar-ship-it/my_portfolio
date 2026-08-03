@@ -1,0 +1,267 @@
+:root {
+  --bg: #fcfaf6;
+  --ink: #000000;
+  --line: #e2e0dc;
+  --surface: #ffffff;
+
+  --p1: #c8102e;
+  --p2: #0f766e;
+  --p3: #1d4ed8;
+  --p4: #7c3aed;
+
+  --font-display: "Bebas Neue", "Arial Black", Impact, "Helvetica Neue", sans-serif;
+  --font-body: "JetBrains Mono", "Courier New", ui-monospace, monospace;
+}
+
+html[data-theme="dark"] {
+  --bg: #0b0b0c;
+  --ink: #f5f3ee;
+  --line: #2a2a2a;
+  --surface: #141414;
+
+  --p1: #ff4d6d;
+  --p2: #2dd4bf;
+  --p3: #60a5fa;
+  --p4: #a78bfa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ---------------------------------------------------------------
+   BRUTAL BORDER SYSTEM
+   - Resting: border already visibly thick (3px) + hard offset shadow
+   - Hover:   border thickens further (4px), element shifts INTO the
+              shadow so the shadow shrinks — reads as "lifting toward you"
+   - Active/click: border thickens MORE (6px) and fully flushes the
+              shadow — a hard, immediate "stamped down" feel
+   --------------------------------------------------------------- */
+.brutal {
+  border: 3px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--ink);
+  background: var(--surface);
+  transition: border-width 0.1s ease, box-shadow 0.1s ease, transform 0.1s ease;
+  cursor: pointer;
+}
+
+.brutal:hover {
+  border-width: 4px;
+  transform: translate(3px, 3px);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.brutal:active {
+  border-width: 6px;
+  transform: translate(6px, 6px);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+/* Static variant for elements that shouldn't shift on hover
+   (e.g. text inputs) — border still thickens on focus */
+.brutal-field {
+  border: 3px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  transition: border-width 0.1s ease, border-color 0.1s ease;
+  font-family: var(--font-body);
+}
+
+.brutal-field:hover {
+  border-color: var(--ink);
+}
+
+.brutal-field:focus {
+  outline: none;
+  border-width: 4px;
+  border-color: var(--ink);
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ---------------------------------------------------------------
+   NEURAL GRAPH — ported as-is from graph.css
+   --------------------------------------------------------------- */
+:root {
+  --transition-med: 0.35s ease;
+}
+ 
+.graph-stage {
+  position: relative;
+  height: 640px;
+  border: 2px solid var(--ink);
+  background: var(--surface);
+  overflow: hidden;
+  transition: background var(--transition-med), border-color var(--transition-med);
+}
+ 
+svg.graphsvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+ 
+.graphsvg path.edge {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  opacity: 0;
+  transition: stroke 0.3s, stroke-width 0.3s, opacity 0.3s;
+}
+ 
+.graphsvg path.edge.center-edge {
+  stroke: var(--ink);
+  stroke-width: 2;
+  opacity: 0.6;
+}
+ 
+.graphsvg path.edge.dim {
+  opacity: 0;
+}
+ 
+.graphsvg path.edge.hot {
+  stroke: var(--proj-color, var(--ink));
+  stroke-width: 2.5;
+  opacity: 1;
+}
+ 
+.gnode {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  z-index: 3;
+}
+ 
+.gnode.dim {
+  opacity: 0.2;
+}
+ 
+.gnode .dot {
+  border: 2px solid var(--ink);
+  background: var(--bg);
+  margin: 0 auto;
+  transition: all 0.25s;
+}
+ 
+.gnode.center .dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+ 
+.gnode.project .dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 0;
+  border-width: 2.5px;
+}
+ 
+.gnode.tech .dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+ 
+.gnode.tech {
+  opacity: 0;
+  pointer-events: none;
+}
+ 
+.gnode.tech.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+ 
+.gnode.tech.dim {
+  opacity: 0;
+}
+ 
+.gnode.project.active .dot {
+  background: var(--proj-color, var(--ink));
+  border-color: var(--proj-color, var(--ink));
+  transform: scale(1.3);
+}
+ 
+.gnode.tech.active .dot {
+  background: var(--proj-color, var(--ink));
+  border-color: var(--proj-color, var(--ink));
+  transform: scale(1.3);
+}
+ 
+.gnode .lbl {
+  font-size: 10px;
+  margin-top: 4px;
+  white-space: nowrap;
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+ 
+.gnode.project .lbl {
+  font-weight: bold;
+  font-size: 12px;
+}
+ 
+.gnode:not(.dim):hover .dot {
+  transform: scale(1.15);
+}
+ 
+/* Legend — not in the original graph.css snippet, added to match the
+   brutal aesthetic used across the rest of the site */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+ 
+.legend .item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 2px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+ 
+.legend .item:hover {
+  border-color: var(--ink);
+}
+ 
+.legend .item.active {
+  border-color: var(--ink);
+  border-width: 3px;
+}
+ 
+.legend .item .sw {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  border: 1.5px solid var(--ink);
+}
+ 
