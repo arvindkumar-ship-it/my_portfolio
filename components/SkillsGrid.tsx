@@ -4,46 +4,51 @@ import { achievements, coreStack, tools } from "@/lib/data";
 
 export default function SkillsGrid() {
   return (
-    <section id="skills" style={styles.section}>
-      <div style={styles.tag}>// Snapshot</div>
-      <h2 style={styles.h2}>Achievements · Stack · Tools</h2>
+    <>
+      <section id="achievements" style={styles.section}>
+        <div style={styles.tag}>// Achievements</div>
+        <h2 style={styles.h2}>Wins & Recognition</h2>
 
-      <div style={styles.grid}>
-        <div style={styles.box}>
-          <h4 style={styles.boxTitle}>Achievements</h4>
-          <ul style={styles.list}>
-            {achievements.map((a) => (
-              <li key={a.label} style={styles.listItem}>
-                <span>{a.label}</span>
-                <span style={styles.placeholder}>{a.value}</span>
-              </li>
-            ))}
-          </ul>
+        <div style={styles.achGrid}>
+          {achievements.map((a) => (
+            <div key={a.title} className="brutal" style={styles.achCard}>
+              <div style={styles.badge}>{a.badge}</div>
+              <div style={styles.achTitle}>{a.title}</div>
+              <div style={styles.achDetail}>{a.detail}</div>
+            </div>
+          ))}
         </div>
+      </section>
 
-        <div style={styles.box}>
-          <h4 style={styles.boxTitle}>Core stack</h4>
-          <div style={styles.tileGrid}>
-            {coreStack.map((t) => (
-              <div key={t} className="brutal" style={styles.tile}>
-                {t}
-              </div>
-            ))}
+      <section id="skills" style={styles.section}>
+        <div style={styles.tag}>// Snapshot</div>
+        <h2 style={styles.h2}>Stack & Tools</h2>
+
+        <div style={styles.grid}>
+          <div style={styles.box}>
+            <h4 style={styles.boxTitle}>Core stack</h4>
+            <div style={styles.tileGrid}>
+              {coreStack.map((t) => (
+                <div key={t} className="brutal" style={styles.tile}>
+                  {t}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div style={styles.box}>
+            <h4 style={styles.boxTitle}>Tools</h4>
+            <div style={styles.tileGrid}>
+              {tools.map((t) => (
+                <div key={t} className="brutal" style={styles.tile}>
+                  {t}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-
-        <div style={styles.box}>
-          <h4 style={styles.boxTitle}>Tools</h4>
-          <div style={styles.tileGrid}>
-            {tools.map((t) => (
-              <div key={t} className="brutal" style={styles.tile}>
-                {t}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 
@@ -74,9 +79,23 @@ const styles: Record<string, React.CSSProperties> = {
     letterSpacing: 1.5,
     textTransform: "uppercase",
   },
-  list: { listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 12 },
-  listItem: { display: "flex", flexDirection: "column", gap: 4, fontSize: 12 },
-  placeholder: { opacity: 0.45, fontSize: 10.5 },
+  achGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+    gap: 16,
+  },
+  achCard: { padding: 16 },
+  badge: {
+    display: "inline-block",
+    border: "2px solid var(--ink)",
+    fontSize: 10,
+    fontWeight: 700,
+    letterSpacing: 1.5,
+    padding: "4px 10px",
+    marginBottom: 12,
+  },
+  achTitle: { fontSize: 13, fontWeight: 700, marginBottom: 6 },
+  achDetail: { fontSize: 10.5, lineHeight: 1.5, opacity: 0.65 },
   tileGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(2, 1fr)",
