@@ -265,3 +265,66 @@ svg.graphsvg {
   border: 1.5px solid var(--ink);
 }
  
+/* ---- HERO responsive ---- */
+.hero-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 72px 32px;
+  max-width: 1200px;
+  position: relative;
+}
+.hero-photo-frame {
+  border: 3px solid var(--ink);
+  box-shadow: 10px 10px 0 var(--ink);
+  padding: 6px;
+  background: var(--bg);
+  position: relative;
+  width: 460px;
+  height: 450px;
+  flex-shrink: 0;
+}
+@media (max-width: 900px) {
+  .hero-section {
+    flex-direction: column-reverse;
+    padding: 40px 20px;
+    gap: 24px;
+  }
+  .hero-photo-frame {
+    width: 100%;
+    max-width: 320px;
+    height: 320px;
+    margin: 0 auto;
+  }
+  .hero-h1 { font-size: 44px !important; }
+  .hero-intro { font-size: 13px !important; }
+}
+
+/* ---- PROJECTS CAROUSEL responsive ---- */
+.carousel-mobile { display: none; }
+@media (max-width: 768px) {
+  .carousel-desktop { display: none !important; }
+  .carousel-mobile {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding: 8px 4px 20px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .carousel-mobile .m-card {
+    scroll-snap-align: center;
+    flex: 0 0 85%;
+  }
+}
+
+/* ---- NEURAL GRAPH responsive ---- */
+@media (max-width: 768px) {
+  .graph-stage { height: auto; aspect-ratio: 1136 / 1050; }
+  .gnode .lbl { font-size: 7px; }
+  .gnode.project .lbl { font-size: 8.5px; }
+  .gnode.center .dot { width: 20px; height: 20px; }
+  .gnode.project .dot { width: 14px; height: 14px; }
+  .gnode.tech .dot { width: 10px; height: 10px; }
+  .legend .item { font-size: 10px; padding: 5px 9px; }
+}
