@@ -8,7 +8,7 @@ const DESKTOP_WIDTH = 1440;
 
 // Below this viewport width, we switch to scaled mode.
 // Above it, everything renders 1:1 exactly as designed.
-const BREAKPOINT = 1024;
+const BREAKPOINT = 1440;
 
 // Don't let it shrink into unreadable territory even on very small phones.
 const MIN_SCALE = 0.32;
@@ -29,11 +29,11 @@ export default function ResponsiveScaler({ children }: { children: React.ReactNo
       }
 
       const rawScale = vw / DESKTOP_WIDTH;
-      const s = Math.max(rawScale, MIN_SCALE);
-      setScale(s);
+      // const s = Math.max(rawScale, MIN_SCALE);
+      setScale(rawScale);
 
       if (innerRef.current) {
-        setWrapperHeight(innerRef.current.scrollHeight * s);
+        setWrapperHeight(innerRef.current.scrollHeight * rawScale);
       }
     }
 
@@ -67,13 +67,15 @@ export default function ResponsiveScaler({ children }: { children: React.ReactNo
       }}
     >
       <div
-        ref={innerRef}
-        style={{
-          width: DESKTOP_WIDTH,
-          transform: `scale(${scale})`,
-          transformOrigin: "top left",
-        }}
-      >
+  ref={innerRef}
+  style={{
+    width: DESKTOP_WIDTH,
+    transform: `scale(${scale})`,
+    transformOrigin: "top left",
+    marginLeft: scale === 1 ? "auto" : 0,
+    marginRight: scale === 1 ? "auto" : 0,
+  }}
+>
         {children}
       </div>
     </div>
