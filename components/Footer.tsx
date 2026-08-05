@@ -41,28 +41,28 @@
 import { useState } from "react";
 import { socials } from "@/lib/data";
 
-export default function Footer() {
+export default function Footer({ onContactClick }: { onContactClick?: () => void }) {
   const [legalOpen, setLegalOpen] = useState(false);
 
   return (
-    <footer style={styles.footer}>
+    <footer className="site-footer" style={styles.footer}>
       <style>{`
         .bordered-btn:active {
           transform: translate(3px, 3px);
           box-shadow: 0 0 0 var(--ink) !important;
         }
       `}</style>
-      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+      <div className="footer-top" style={{ display: "flex", alignItems: "center", gap: 12 }}>
   <span>© 2026 ARVIND. ALL RIGHTS RESERVED.</span>
   <button
-    className="bordered-btn"
+    className="bordered-btn legal-btn"
     style={styles.legalButton}
     onClick={() => setLegalOpen(true)}
   >
     [ Legal ]
   </button>
 </div>
-<div style={styles.links}>
+<div className="footer-links" style={styles.links}>
   {socials.map((s) => (
     <a
       key={s.label}
@@ -74,6 +74,15 @@ export default function Footer() {
       {s.label}
     </a>
   ))}
+  {onContactClick && (
+    <button
+      className="bordered-btn footer-contact-btn"
+      style={styles.legalButton}
+      onClick={onContactClick}
+    >
+      [ Contact ]
+    </button>
+  )}
 </div>
 
       {legalOpen && (

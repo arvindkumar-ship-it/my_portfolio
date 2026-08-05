@@ -184,11 +184,11 @@ export default function Home() {
         <EngineeringJudgment />
       </main>
 
-      <Footer />
+      <Footer onContactClick={() => setContactOpen(true)} />
 
       <button
         onClick={() => setContactOpen(true)}
-        className="brutal"
+        className="brutal corner-tag"
         style={styles.cornerTag}
         aria-label="Open contact form"
       >
