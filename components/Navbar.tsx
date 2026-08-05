@@ -115,10 +115,10 @@ const links = [
 
 export default function Navbar({ onContactClick, theme, onToggleTheme }: NavbarProps) {
   return (
-    <nav style={styles.nav}>
+    <nav className="navbar" style={styles.nav}>
       <a href="#hero" className="brutal" style={styles.logo}>AK</a>
-      <div style={styles.right}>
-        <div style={styles.links}>
+      <div className="nav-right" style={styles.right}>
+        <div className="nav-links" style={styles.links}>
           {links.map((l) => (
             <a key={l.href} href={l.href} style={styles.link}>
               {l.label}
@@ -171,7 +171,7 @@ const styles: Record<string, React.CSSProperties> = {
   links: {
     display: "flex",
     alignItems: "center",
-    gap: 24,
+    // gap: 24,
   },
   link: {
     color: "var(--ink)",
