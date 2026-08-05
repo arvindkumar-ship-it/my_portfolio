@@ -333,12 +333,15 @@ const styles: Record<string, React.CSSProperties> = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    overflow: "hidden",
+    maxWidth: "100%",
   },
   stage: {
     position: "relative",
     height: 440,
     width: "100%",
     maxWidth: 900,
+    overflow: "hidden",
   },
   card: {
     position: "absolute",
