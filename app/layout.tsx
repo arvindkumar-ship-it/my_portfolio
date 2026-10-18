@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Arvind — AI Platform & Agentic Systems Engineer",
+  title: "Arvind Kumar — AI & Backend Engineer",
   description:
-    "Portfolio of Arvind — AI Platform & Agentic Systems developer. AgentSec, Raahgir AI, CareFlow, Anvesh.",
+    "Arvind Kumar builds LLM-based backend systems: agent security scanning, multi-agent pipelines and structured data extraction.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
